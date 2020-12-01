@@ -1,0 +1,3 @@
+curl -sS ifconfig.me/ip
+EndPoint:
+https://stat.ripe.net/data/country-resource-list/data.json?resource=US&v4_format=prefix
