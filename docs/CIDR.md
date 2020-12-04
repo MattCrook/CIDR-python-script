@@ -42,7 +42,7 @@ Since the first two octets are all turned on, we know they will be *192.168*, as
 Now to calculate, and since we already know the first two and last octets, those are represented in x's.
 * The middle row is our subnet mask number we calculated earlier.
 * The top number is the subnet mask converted to binary.
-* The bottom number is the final number we get by applying what is called a logic table to determine what the IP address would be for that particular number.
+* The bottom number is the final number we get by applying what is called a ***logic table*** to determine what the IP address would be for that particular number.
 * This works by taking both values, and if they both equal true, then it'll make it true. Almost like multiplication. The bottom number times the top.
 ```sh
 xxxxxxxx.xxxxxxxx.00111100.xxxxxxxx

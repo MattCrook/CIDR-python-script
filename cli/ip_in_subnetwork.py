@@ -1,8 +1,8 @@
 import socket
 import binascii
 import os
-from Colors import bcolors
-from helpers import error_handler, get_list_of_CIDRs
+from .helpers import get_list_of_CIDRs, error_handler
+from .Colors import bcolors
 
 
 
@@ -20,7 +20,6 @@ def check_if_ip_in_subnetwork(host_ip):
         if is_subnetwork:
             matched_subnetwork.append(is_subnetwork)
 
-    # print(matched_subnetwork)
     return matched_subnetwork
 
 
@@ -33,11 +32,11 @@ def ip_in_subnetwork(ip_address, subnetwork):
     if version1 != version2:
         raise ValueError("incompatible IP versions")
 
-    # to return the matching subnetwork
+    """to return the matching subnetwork"""
     if ip_lower <= ip_integer <= ip_upper:
         return subnetwork
 
-    # to return True/False
+    """to return True/False"""
     # return ip_lower <= ip_integer <= ip_upper
 
 

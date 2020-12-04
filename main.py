@@ -1,8 +1,9 @@
 import os
 import requests
 from ipaddress import IPv4Address
-from ip_in_subnetwork import ip_in_subnetwork, check_if_ip_in_subnetwork, find_host_ip
-from Colors import bcolors
+import subprocess
+from cli import find_host_ip, check_if_ip_in_subnetwork, bcolors
+
 
 
 
@@ -31,6 +32,6 @@ def main():
 
 
     if choice == "3":
-        os.system('echo Exited')
+        os.system(f'echo {bcolors.WARNING} Exited{bcolors.ENDC}')
 
 main()
