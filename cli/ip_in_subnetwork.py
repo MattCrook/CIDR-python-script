@@ -1,11 +1,10 @@
 import socket
 import binascii
 import os
+import sys
 from .helpers import get_list_of_CIDRs, error_handler
 from .Colors import bcolors
 import unittest
-
-
 
 
 def check_if_ip_in_subnetwork(host_ip):
@@ -23,7 +22,6 @@ def check_if_ip_in_subnetwork(host_ip):
             matched_subnetwork.append(is_subnetwork)
 
     return matched_subnetwork
-
 
 
 def ip_in_subnetwork(ip_address, subnetwork):
@@ -50,44 +48,34 @@ def ip_to_integer(ip_address):
             ip_integer = int(binascii.hexlify(ip_hex), 16)
             return (ip_integer, 4 if version == socket.AF_INET else 6)
 
-    except ValueError as val:
-        print("FAIL")
+    except Exception as val:
+        print(f'{bcolors.FAIL}FAIL{bcolors.ENDC}')
         error_handler(val)
-
 
 
 def subnetwork_to_ip_range(subnetwork):
-    try:
-        # array with subnet mask and cidr (subnet mask)
-        fragments = subnetwork.split('/')
-        subnet_mask = fragments[0]
-        cidr = int(fragments[1])
 
-        # try parsing the subnetwork first as IPv4, then as IPv6
-        for version in (socket.AF_INET, socket.AF_INET6):
-            ip_len = 32 if version == socket.AF_INET else 128
+    # array with subnet mask and cidr (subnet mask)
+    fragments = subnetwork.split('/')
+    subnet_mask = fragments[0]
+    cidr = int(fragments[1])
 
-            try:
-                # shifts the left hand operand the number of places the right hand operand specifies.
-                # Here, shifting 32 - the cidr - 1
-                # subtracting 1 to get final value of upper and lower ranges as those will be our NetworkId and BroadcastID + or -1.
-                suffix_mask = (1 << (ip_len - cidr)) - 1
-                netmask = ((1 << ip_len) - 1) - suffix_mask
-                ip_hex = socket.inet_pton(version, subnet_mask)
-                ip_lower = int(binascii.hexlify(ip_hex), 16) & netmask
-                ip_upper = ip_lower + suffix_mask
+    # try parsing the subnetwork first as IPv4, then as IPv6
+    for version in (socket.AF_INET, socket.AF_INET6):
+        ip_len = 32 if version == socket.AF_INET else 128
 
-                return (ip_lower,
-                        ip_upper,
-                        4 if version == socket.AF_INET else 6)
-            except:
-                pass
-    except ValueError as val:
-        print("FAIL")
-        error_handler(val)
+        # shifts the left hand operand the number of places the right hand operand specifies.
+        # Here, shifting 32 - the cidr - 1
+        # subtracting 1 to get final value of upper and lower ranges as those will be our NetworkId and BroadcastID + or -1.
+        suffix_mask = (1 << (ip_len - cidr)) - 1
+        netmask = ((1 << ip_len) - 1) - suffix_mask
+        ip_hex = socket.inet_pton(version, subnet_mask)
+        ip_lower = int(binascii.hexlify(ip_hex), 16) & netmask
+        ip_upper = ip_lower + suffix_mask
 
-
-
+        return (ip_lower,
+                ip_upper,
+                4 if version == socket.AF_INET else 6)
 
 
 def find_host_ip():
@@ -103,7 +91,8 @@ def find_host_ip():
     if choice == "1":
         host_ip = input('> Enter IP Address: ')
         find_ip_in_cidr = check_if_ip_in_subnetwork(host_ip)
-        print(f'{bcolors.OKGREEN}PASS{bcolors.ENDC}') if len(find_ip_in_cidr) >= 1 else print(f'{bcolors.FAIL}FAIL{bcolors.ENDC}')
+        print(f'{bcolors.OKGREEN}PASS{bcolors.ENDC}') if len(
+            find_ip_in_cidr) >= 1 else print(f'{bcolors.FAIL}FAIL{bcolors.ENDC}')
 
     if choice == "2":
-        os.system('clear')
+        sys.exit()

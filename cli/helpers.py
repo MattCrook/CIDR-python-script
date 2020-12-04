@@ -1,5 +1,6 @@
 import requests
 import os
+import sys
 from .Colors import bcolors
 
 
@@ -12,6 +13,9 @@ def get_list_of_CIDRs():
 
 
 def error_handler(error):
-    print("See error output in terminal?")
+    print(f'{bcolors.WARNING}See error output in terminal?{bcolors.ENDC}')
     choice = input("(y/N) > ")
-    print(error) if choice == "y" or choice == "Y" else os.system('clear')
+    if choice == "n" or choice == "N":
+        sys.exit()
+    elif choice == "y" or choice == "Y":
+        print(error)
