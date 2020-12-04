@@ -62,10 +62,6 @@ def subnetwork_to_ip_range(subnetwork):
         network_prefix = fragments[0]
         # cidr
         netmask_len = int(fragments[1])
-        # print("fragments", fragments)
-        # print("network_prefix", network_prefix)
-        # print('netmask_len', netmask_len)
-
 
         # try parsing the subnetwork first as IPv4, then as IPv6
         for version in (socket.AF_INET, socket.AF_INET6):
