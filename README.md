@@ -13,7 +13,8 @@ For a description of CIDR notation, and how to find the upper and lower IP range
   * `pip install -r requirements.txt`
 * To run program, execute on the CLI:
   * `chmod +x execute.sh` - to make shell command executable.
-  * `./execute.sh`
+  * To run:
+    * `./execute.sh`
 
 
 To deactivate virtual env, simply run `deactivate`.
