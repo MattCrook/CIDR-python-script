@@ -1,5 +1,6 @@
 import requests
 import os
+from .Colors import bcolors
 
 
 def get_list_of_CIDRs():

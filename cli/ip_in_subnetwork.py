@@ -3,20 +3,22 @@ import binascii
 import os
 from .helpers import get_list_of_CIDRs, error_handler
 from .Colors import bcolors
+import unittest
 
 
 
 
 def check_if_ip_in_subnetwork(host_ip):
+
     print(f'{bcolors.OKBLUE}Searching...This may take a couple seconds.{bcolors.ENDC}')
 
     data = get_list_of_CIDRs()
 
-    subnetworks = data['data']['resources']['ipv4']
+    IPv4s = data['data']['resources']['ipv4']
     matched_subnetwork = []
 
-    for cidr in subnetworks:
-        is_subnetwork = ip_in_subnetwork(host_ip, cidr)
+    for subnetwork in IPv4s:
+        is_subnetwork = ip_in_subnetwork(host_ip, subnetwork)
         if is_subnetwork:
             matched_subnetwork.append(is_subnetwork)
 
@@ -56,25 +58,22 @@ def ip_to_integer(ip_address):
 
 def subnetwork_to_ip_range(subnetwork):
     try:
-        # array with subnet mask and cidr
+        # array with subnet mask and cidr (subnet mask)
         fragments = subnetwork.split('/')
-        # subnet mask
-        network_prefix = fragments[0]
-        # cidr
-        netmask_len = int(fragments[1])
+        subnet_mask = fragments[0]
+        cidr = int(fragments[1])
 
         # try parsing the subnetwork first as IPv4, then as IPv6
         for version in (socket.AF_INET, socket.AF_INET6):
-
             ip_len = 32 if version == socket.AF_INET else 128
 
             try:
-                suffix_mask = (1 << (ip_len - netmask_len)) - 1
-                # print("suffix_mask", suffix_mask)
+                # shifts the left hand operand the number of places the right hand operand specifies.
+                # Here, shifting 32 - the cidr - 1
+                # subtracting 1 to get final value of upper and lower ranges as those will be our NetworkId and BroadcastID + or -1.
+                suffix_mask = (1 << (ip_len - cidr)) - 1
                 netmask = ((1 << ip_len) - 1) - suffix_mask
-                # print('netmask', netmask)
-                ip_hex = socket.inet_pton(version, network_prefix)
-                # print('ip_hex', ip_hex)
+                ip_hex = socket.inet_pton(version, subnet_mask)
                 ip_lower = int(binascii.hexlify(ip_hex), 16) & netmask
                 ip_upper = ip_lower + suffix_mask
 

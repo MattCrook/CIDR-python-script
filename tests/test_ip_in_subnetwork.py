@@ -1,9 +1,8 @@
 import unittest
 from unittest import mock
-from ip_in_subnetwork import ip_in_subnetwork, ip_to_integer, subnetwork_to_ip_range, check_if_ip_in_subnetwork
 from unittest.mock import patch, Mock
-from helpers import get_list_of_CIDRs
-
+from cli.ip_in_subnetwork import ip_in_subnetwork, ip_to_integer, subnetwork_to_ip_range, check_if_ip_in_subnetwork
+from cli.helpers import get_list_of_CIDRs
 
 
 
@@ -53,7 +52,7 @@ class TestIpInSubnetwork(unittest.TestCase):
 
 
     @mock.patch('requests.get')
-    def test_cidr_query(self, mock_get):
+    def test_get_list_of_CIDRs(self, mock_get):
         mock_resp = self._mock_response(content=CONTENT)
         mock_get.return_value = mock_resp
         mock_result = get_list_of_CIDRs()
@@ -79,18 +78,6 @@ class TestIpInSubnetwork(unittest.TestCase):
 
 
 
-    # def test_ip_in_subnetwork(self, host_ip='68.52.38.81', subnetwork='68.32.0.0/11'):
-    #     (ip_integer, version1) = ip_to_integer(host_ip)
-    #     (ip_lower, ip_upper, version2) = subnetwork_to_ip_range(subnetwork)
-
-    #     self.assertTrue(version1 == version2)
-    #     self.assertEqual(version1, 4)
-    #     self.assertEqual(ip_integer, 1144268369)
-    #     self.assertEqual(ip_lower, 1142947840)
-    #     self.assertEqual(ip_upper, 1145044991)
-    #     self.assertEqual(version2, 4)
-
-
     def test_ip_in_subnetwork(self, host_ip='68.52.38.81', subnetwork='68.32.0.0/11'):
         match = ip_in_subnetwork(host_ip, subnetwork)
         self.assertTrue(match == '68.32.0.0/11')
@@ -103,13 +90,8 @@ class TestIpInSubnetwork(unittest.TestCase):
 
 
     def test_subnetwork_to_ip_range(self, subnetwork='68.32.0.0/11'):
-        self.assertEqual(subnetwork_to_ip_range(
-            subnetwork), (1142947840, 1145044991, 4))
+        self.assertEqual(subnetwork_to_ip_range(subnetwork), (1142947840, 1145044991, 4))
 
 
 if __name__ == '__main__':
     unittest.main()
-
-def test_ip_in_subnetwork(self, host_ip='68.52.38.81', subnetwork='68.32.0.0/11'):
-    match = ip_in_subnetwork(host_ip, subnetwork)
-    self.assertTrue(match == ['68.32.0.0/11'])
