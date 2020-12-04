@@ -6,7 +6,6 @@ from cli import find_host_ip, check_if_ip_in_subnetwork, bcolors
 
 
 
-
 def build_main():
     print("-----------------------------------------------")
     print("Input Ip Address To Search If In Provided CIDRs")
@@ -30,8 +29,8 @@ def main():
         result = check_if_ip_in_subnetwork(host_ip)
         print(f'{bcolors.OKGREEN}PASS{bcolors.ENDC}') if len(result) >= 1 else print(f'{bcolors.FAIL}FAIL{bcolors.ENDC}')
 
-
     if choice == "3":
         os.system(f'echo {bcolors.WARNING} Exited{bcolors.ENDC}')
+
 
 main()
