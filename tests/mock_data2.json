@@ -1,0 +1,29 @@
+{
+    "messages": [],
+    "see_also": [],
+    "version": "0.2",
+    "data_call_status": "supported - connecting to ursa",
+    "cached": false,
+    "data": {
+      "query_time": "2020-12-02T00:00:00",
+      "resources": {
+        "asn": [
+          "1",
+          "2"
+        ],
+        "ipv4": [
+          "68.32.0.0/11"
+        ],
+        "ipv6": [
+            "2001:400::/32"
+        ]
+      }
+    },
+    "query_id": "20201203153102-ab945977-ca1d-4360-90ad-e77b8a02c879",
+    "process_time": 12852,
+    "server_id": "app129",
+    "build_version": "live.2020.12.2.112",
+    "status": "ok",
+    "status_code": 200,
+    "time": "2020-12-03T15:31:15.475628"
+  }

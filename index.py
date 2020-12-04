@@ -1,34 +1,36 @@
 import os
 import requests
 from ipaddress import IPv4Address
-# URL = "https://stat.ripe.net/data/country-resource-list/data.json?resource=US&v4_format=prefix"
-# location given here
-# location = "delhi technological university"
-# defining a params dict for the parameters to be sent to the API
-# PARAMS = {'address': location}
-# PARAMS = {}
-# sending get request and saving the response as response object
-# r = requests.get(url=URL, params=PARAMS)
-# extracting data in json format
-# data = r.json()
-# host_ip = os.system('curl -sS ifconfig.me/ip')
-# print(host_ip)
+from ip_in_subnetwork import ip_in_subnetwork, check_if_ip_in_subnetwork, find_host_ip
+from Colors import bcolors
+
+
+
 def build_main():
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    # host_ip = os.system('curl -sS ifconfig.me/ip')
-    # message = (f'Your Current IP Addres: {host_ip}')
-    print("-----")
+    print("-----------------------------------------------")
     print("Input Ip Address To Search If In Provided CIDRs")
+    print("-----------------------------------------------")
+
     print("1. My IP Address")
     print("2. Search For IP Address in CIDRs")
     print("3. Exit")
+
+
 def main():
     build_main()
-    choice= input(">>")
+
+    choice = input("> ")
+
     if choice == "1":
-        pass
+        find_host_ip()
+
     if choice == "2":
-        pass
+        host_ip = input("> Enter IP Address: ")
+        result = check_if_ip_in_subnetwork(host_ip)
+        print(f'{bcolors.OKGREEN}PASS{bcolors.ENDC}') if len(result) >= 1 else print(f'{bcolors.FAIL}FAIL{bcolors.ENDC}')
+
+
     if choice == "3":
-        os.system('clear')
+        os.system('echo Exited')
+
 main()
