@@ -10,11 +10,11 @@ The usable IPs is a range of IP addresses with a low and high end.
 * The high end being Broadcast ID minus 1
 
 #### CIDR Notation
-* Stands for Classless Inter-Domain Routing, and is a compact representation of an IP address and its associated routing prefix and a method for allocating IP addresses and for IP routing.
+* Stands for *Classless Inter-Domain Routing*, and is a compact representation of an IP address and its associated routing prefix and a method for allocating IP addresses and for IP routing.
 * It is the "/" at the end of an IP address, like the "/20" in the example above.
 
 To visualize what is going on, we can look at a Powers of Two table, and begin with the **Subnet Mask**, which is a [bitmask](https://en.wikipedia.org/wiki/Mask_(computing)) that encodes the prefix length associated with an IPv4 address or network in quad-dotted notation: 32 bits, starting with a number of 1 bits equal to the prefix length, ending with 0 bits, and encoded in four-part dotted-decimal format: ***255.255.255.0***.
-* The CIDR notation is in simple terms, the number of bits turned on. (Represented by 1).
+* The CIDR notation is in simple terms, the number of bits "turned on". (Represented by 1).
 
 ![PowersOfTwo](../public/PowersOfTwo.png)
 
@@ -28,13 +28,14 @@ To visualize what is going on, we can look at a Powers of Two table, and begin w
     * Now we have our subnet: ***255.255.240.0***.
 
 
-From here, we could translate each octet into binary, but in this example, that would be unnecessary. Since the first two are all on, and the last is all off, we can simply look at the third octet.
+From here, we could translate each octet into binary, but in this example, that wouldn't be unnecessary. Since the first two are all on, and the last is all off, we can simply look at the third octet.
 
 ![ThirdOctet](../public/ThirdOctet.png)
 
 #### Converting to Binary
 
-Since the first two octets are all turned on, we know they will be *192.168*, as well as the last octet being all zeros, that will be 0 for Network IP, and 255 for Broadcast ID.
+Since the first two octets are all turned on, we know they will be *192.168*, as well as the last octet being all zeros, that will be 0 for Network IP, and 255 for Broadcast ID. *For more on why the BroadcastID is 255, see [here](./BroadcastID.md)*.
+
 ![Octets](../public/Octets.png)
 
 
