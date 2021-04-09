@@ -22,7 +22,7 @@ To deactivate virtual env, simply run `deactivate`.
 ### Sample IPs To Test
 You can follow the prompt in the program and try your own IP, or try one of the following:
 
-* 68.52.38.81 (Mine)
+* 68.52.38.81
 * 50.38.30.81
 * I took a random IPv4 from the list at the endpoint [provided](https://stat.ripe.net/data/country-resource-list/data.json?resource=US&v4_format=prefix), ***(14.102.172.0/22)*** , and manually backwards engineered it to find out the IP range. Doing this meant that any IP in the range I found should result in a *PASS*.
   * The range I found was:
