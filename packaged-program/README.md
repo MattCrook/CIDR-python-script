@@ -1,4 +1,4 @@
-# Finding IP in Subnetwork -- Using pyRIPENCC
+# Finding IP in Subnetwork - Using pyRIPENCC
 Input validated as IP v4 address; returns Pass if IP address is present or Fail if not present in one of the CIDRs within the json data returned by RIPE NCC.
 
 
