@@ -1,20 +1,29 @@
-# pyRIPENCC
-Input validated as IP v4 addess; returns Pass if IP address is present or Fail if not present in one of the CIDRs within the json data returned by RIPE NCC.
+# Finding IP in Subnetwork -- Using pyRIPENCC
+Input validated as IP v4 address; returns Pass if IP address is present or Fail if not present in one of the CIDRs within the json data returned by RIPE NCC.
 
 
-### make data cache dir
+##### Make data cache dir
+```
 mkdir ripeStatCache
+```
 
-### load data
+##### Load data
+```
 python pyQryRipencc/ripeStatQuery.py --name country-resource-list --format json --queryParams '{"resource": "US", "v4_format": "prefix"}'
+```
 
-### search IP (Pass)
+##### Search IP (Pass)
+```
 python pyQryRipencc/ripeStatSearch.py --name country-resource-list --format json --queryParams '{"resource": "US", "v4_format": "prefix"}' --ipAddress 2.56.11.1
+```
 
-### search IP (Fail)
+##### Search IP (Fail)
+```
 python pyQryRipencc/ripeStatSearch.py --name country-resource-list --format json --queryParams '{"resource": "US", "v4_format": "prefix"}' --ipAddress 123.123.123.1
+```
 
-### Command Line usage (ripeStatSearch)
+##### Command Line usage (ripeStatSearch)
+```
 python pyQryRipencc/ripeStatQuery.py -h 
 usage: ripeStatQuery.py [-h] [--name {country-resource-list}] [--format {json,txt}] [--queryParams QUERYPARAMS]
 
@@ -31,8 +40,9 @@ optional arguments:
                         Use Keys and values specific to the data call, for example:
                         --name country-resource-list --queryParams \
                             {'resource': 'US', 'v4_format': 'prefix'}
-
-### Command Line usage (ripeStatSearch)
+```
+##### Command Line usage (ripeStatSearch)
+```
 python pyQryRipencc/ripeStatSearch.py -h
 usage: ripeStatSearch.py [-h] [--name {country-resource-list}] [--format {json,txt}] [--queryParams QUERYPARAMS] --ipAddress IPADDRESS
 
@@ -51,3 +61,4 @@ optional arguments:
                             {'resource': 'US', 'v4_format': 'prefix'}
   --ipAddress IPADDRESS
                         Results format.
+```
